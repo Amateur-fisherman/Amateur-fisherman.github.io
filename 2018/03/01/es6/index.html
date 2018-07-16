@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="技术内容技术内容">
+<meta name="description" content="[TOC] Functionarguments.callee使用场合：递归算法 解决问题：消除代码的紧密耦合 问题：严格模式下报错 123456789101112131415function factorial(num)&amp;#123; if (num &amp;lt;=1) &amp;#123; return 1; &amp;#125; else &amp;#123; return num * factorial(num-1)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微信小程序">
+<meta property="og:title" content="《js高级程序设计》笔记">
 <meta property="og:url" content="http://yoursite.com/2018/03/01/es6/index.html">
 <meta property="og:site_name" content="sunny的四维空间">
-<meta property="og:description" content="技术内容技术内容">
+<meta property="og:description" content="[TOC] Functionarguments.callee使用场合：递归算法 解决问题：消除代码的紧密耦合 问题：严格模式下报错 123456789101112131415function factorial(num)&amp;#123; if (num &amp;lt;=1) &amp;#123; return 1; &amp;#125; else &amp;#123; return num * factorial(num-1)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-16T06:59:16.398Z">
+<meta property="og:updated_time" content="2018-07-16T07:43:21.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微信小程序">
-<meta name="twitter:description" content="技术内容技术内容">
+<meta name="twitter:title" content="《js高级程序设计》笔记">
+<meta name="twitter:description" content="[TOC] Functionarguments.callee使用场合：递归算法 解决问题：消除代码的紧密耦合 问题：严格模式下报错 123456789101112131415function factorial(num)&amp;#123; if (num &amp;lt;=1) &amp;#123; return 1; &amp;#125; else &amp;#123; return num * factorial(num-1)">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>微信小程序 | sunny的四维空间</title>
+  <title>《js高级程序设计》笔记 | sunny的四维空间</title>
   
 
 
@@ -259,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">微信小程序</h1>
+          <h1 class="post-title" itemprop="name headline">《js高级程序设计》笔记</h1>
         
 
         <div class="post-meta">
@@ -332,8 +332,16 @@
 
       
         <blockquote>
-<p>技术内容技术内容</p>
 </blockquote>
+<p>[TOC]</p>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><h2 id="arguments-callee"><a href="#arguments-callee" class="headerlink" title="arguments.callee"></a>arguments.callee</h2><p>使用场合：递归算法</p>
+<p>解决问题：消除代码的紧密耦合</p>
+<p>问题：严格模式下报错</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (num &lt;=<span class="number">1</span>) &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"> <span class="keyword">return</span> num * factorial(num<span class="number">-1</span>)</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (num &lt;=<span class="number">1</span>) &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"> <span class="keyword">return</span> num * <span class="built_in">arguments</span>.callee(num<span class="number">-1</span>)</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="caller"><a href="#caller" class="headerlink" title="caller"></a>caller</h2><p>这个属性中保存着调用当前函数的函数的引用</p>
+<p>问题：严格模式下报错</p>
+<p>原因：加强这门语言的安全性，这样第三方代码就不能在相同的环境里窥视其他代码了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> inner();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> alert(inner.caller);</span><br><span class="line">&#125;</span><br><span class="line">outer();<span class="comment">//outer函数源码</span></span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> inner();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> alert(<span class="built_in">arguments</span>.callee.caller);</span><br><span class="line">&#125;</span><br><span class="line">outer();</span><br></pre></td></tr></table></figure></p>
+<h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><h2 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h2><p>使用场合：即设置一个属性的值会导致其他属性发生变化<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line"> _year: <span class="number">2004</span>,</span><br><span class="line"> edition: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">"year"</span>, &#123;</span><br><span class="line"> get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">this</span>._year;</span><br><span class="line"> &#125;,</span><br><span class="line"> set: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) &#123;</span><br><span class="line"> <span class="keyword">this</span>._year = newValue;</span><br><span class="line"> <span class="keyword">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br><span class="line">book.year = <span class="number">2005</span>;</span><br><span class="line">alert(book.edition); <span class="comment">//2 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line"> _year: <span class="number">2004</span>,</span><br><span class="line"> edition: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//定义访问器的旧有方法</span></span><br><span class="line">book.__defineGetter__(<span class="string">"year"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">this</span>._year;</span><br><span class="line">&#125;);</span><br><span class="line">book.__defineSetter__(<span class="string">"year"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) &#123;</span><br><span class="line"> <span class="keyword">this</span>._year = newValue;</span><br><span class="line"> <span class="keyword">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br><span class="line">book.year = <span class="number">2005</span>;</span><br><span class="line">alert(book.edition); <span class="comment">//2</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -358,8 +366,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/01/hello-world/" rel="next" title="杀死一只知更鸟观后感">
-                <i class="fa fa-chevron-left"></i> 杀死一只知更鸟观后感
+              <a href="/2018/03/01/hello-world/" rel="next" title="借我">
+                <i class="fa fa-chevron-left"></i> 借我
               </a>
             
           </div>
@@ -418,8 +426,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -434,7 +451,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -470,6 +487,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">1.</span> <span class="nav-text">Function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#arguments-callee"><span class="nav-number">1.1.</span> <span class="nav-text">arguments.callee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#caller"><span class="nav-number">1.2.</span> <span class="nav-text">caller</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object"><span class="nav-number">2.</span> <span class="nav-text">Object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#访问器属性"><span class="nav-number">2.1.</span> <span class="nav-text">访问器属性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
